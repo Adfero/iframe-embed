@@ -4,7 +4,10 @@
     "John Jones <jjones@adfero.com>"
   ],
   "description": "",
-  "main": "iframeEmbed.js",
+  "main": [
+    "embeddedIFrame.js",
+    "embedIFrame.js"
+  ],
   "license": "MIT",
   "homepage": "",
   "ignore": [
