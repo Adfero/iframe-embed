@@ -1,7 +1,7 @@
 'use strict';
 window.embedIFrame = function(inoptions) {
   var options = _.extend({
-    'id': null
+    'id': null,
     'source': null,
     'messageTarget': '*'
   },inoptions || {});
