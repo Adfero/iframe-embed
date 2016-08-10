@@ -1,0 +1,20 @@
+{
+  "name": "iframe-embed",
+  "authors": [
+    "John Jones <jjones@adfero.com>"
+  ],
+  "description": "",
+  "main": "iframeEmbed.js",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
+}
