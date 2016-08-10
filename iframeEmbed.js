@@ -11,7 +11,6 @@
       myEventListener(myEventMessage, function (e) {
         if (e.data && e.data.source == options.source) {
   				embedIFrame.height = e.data.height + "px";
-  				embedIFrame.scrollHeight = e.data.height + "px";
   			}
       },false);
       setInterval(function() {
