@@ -1,10 +1,6 @@
 'use strict';
-window.embedIFrame = function(inoptions) {
-  var options = _.extend({
-    'id': null,
-    'source': null,
-    'messageTarget': '*'
-  },inoptions || {});
+window.embedIFrame = function(options) {
+  options.messageTarget = options.messageTarget || '*';
   var embedIFrame = document.getElementById(options.id);
   if (embedIFrame) {
     var myEventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
@@ -26,12 +22,8 @@ window.embedIFrame = function(inoptions) {
 		},100);
   }
 }
-window.embeddedIFrame = function(inoptions) {
-  var options = _.extend({
-    'source': null,
-    'messageTarget': '*',
-    'gaDimension': false
-  },inoptions || {});
+window.embeddedIFrame = function(options) {
+  options.messageTarget = options.messageTarget || '*';
   var lastHeight = 0;
   var interval = setInterval(function(){
     var currentHeight = document.body.offsetHeight;
