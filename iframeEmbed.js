@@ -17,7 +17,9 @@
   			embedIFrame.contentWindow.postMessage({
   				'height': window.innerHeight,
   				'width': window.innerWidth,
-          'href': window.location.href
+          'href': window.location.href,
+          'offset': embedIFrame.offsetTop,
+          'scrollTop': document.body.scrollTop - embedIFrame.offsetTop
   			},options.messageTarget);
   		},100);
     }
@@ -44,8 +46,7 @@
         if (options.gaDimension && ga) {
           ga('set', options.gaDimension, e.data.href);
         }
-        window.iFrameParentWidth = e.data.width;
-        window.iFrameParentHeight = e.data.height;
+        window.iframeParent = e.data
       }
     });
   }
