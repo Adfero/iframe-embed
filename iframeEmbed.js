@@ -19,7 +19,8 @@
   				'width': window.innerWidth,
           'href': window.location.href,
           'offset': embedIFrame.offsetTop,
-          'scrollTop': document.body.scrollTop - embedIFrame.offsetTop
+          'scrollTop': document.body.scrollTop - embedIFrame.offsetTop,
+          'hash': window.location.hash
   			},options.messageTarget);
   		},100);
     }
@@ -47,6 +48,9 @@
           ga('set', options.gaDimension, e.data.href);
         }
         window.iframeParent = e.data
+        if (options.callback) {
+          options.callback(e.data);
+        }
       }
     });
   }
