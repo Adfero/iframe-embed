@@ -8,9 +8,16 @@
       var myEventListener = window[myEventMethod];
       var myEventMessage = myEventMethod == "attachEvent" ? "onmessage" : "message";
       embedIFrame.width = "100%";
+      var lastPosition = null;
       myEventListener(myEventMessage, function (e) {
         if (e.data && e.data.source == options.source) {
   				embedIFrame.height = e.data.height + "px";
+          if (e.data.goToPosition != lastPosition) {
+            lastPosition = e.data.goToPosition;
+            $('html,body').animate({
+              'scrollTop': lastPosition + embedIFrame.offsetTop
+            });
+          }
   			}
       },false);
       setInterval(function() {
@@ -28,15 +35,18 @@
   window.embeddedIFrame = function(options) {
     options.messageTarget = options.messageTarget || '*';
     var lastHeight = 0;
+    window.goToPosition = null;
     var interval = setInterval(function(){
       var currentHeight = document.body.offsetHeight;
-      if (currentHeight != lastHeight) {
-        lastHeight = currentHeight;
-        var prevHeight = {
+      if (currentHeight != lastHeight || window.goToPosition != null) {
+        var message = {
           'source': options.source,
-          'height': currentHeight
+          'height': currentHeight,
+          'goToPosition': window.goToPosition
         };
-        window.parent.postMessage(prevHeight,options.messageTarget);
+        window.parent.postMessage(message,options.messageTarget);
+        window.goToPosition = null;
+        lastHeight = currentHeight;
       }
     }, 100);
     var myEventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
