@@ -10,7 +10,7 @@
       embedIFrame.width = "100%";
       var lastPosition = null;
       myEventListener(myEventMessage, function (e) {
-        if (e.data && e.data.source == options.source) {
+        if (e.data && e.data.source == options.source && e.source != window) {
   				embedIFrame.height = e.data.height + "px";
           if (e.data.goToPosition != lastPosition && (jQuery || $)) {
             lastPosition = e.data.goToPosition;
@@ -55,7 +55,7 @@
     var myEventListener = window[myEventMethod];
     var myEventMessage = myEventMethod == "attachEvent" ? "onmessage" : "message";
     myEventListener(myEventMessage, function (e) {
-      if (e.data) {
+      if (e.data && e.source != window) {
         if (options.gaDimension && ga) {
           ga('set', options.gaDimension, e.data.href);
         }
