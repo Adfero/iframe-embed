@@ -59,8 +59,8 @@
         if (options.gaDimension && ga) {
           ga('set', options.gaDimension, e.data.href);
         }
-        if (!window.iframeParent && window.iframeParentActivated) {
-          window.iframeParentActivated(e.data);
+        if (!window.iframeParent && options.iframeParentActivated) {
+          options.iframeParentActivated(e.data);
         }
         window.iframeParent = e.data
         if (options.callback) {
