@@ -12,8 +12,9 @@
       myEventListener(myEventMessage, function (e) {
         if (e.data && e.data.source == options.source) {
   				embedIFrame.height = e.data.height + "px";
-          if (e.data.goToPosition != lastPosition) {
+          if (e.data.goToPosition != lastPosition && (jQuery || $)) {
             lastPosition = e.data.goToPosition;
+            var $ = (jQuery || $);
             $('html,body').animate({
               'scrollTop': lastPosition + embedIFrame.offsetTop
             });
@@ -36,6 +37,7 @@
     options.messageTarget = options.messageTarget || '*';
     var lastHeight = 0;
     window.goToPosition = null;
+    window.iframeParent = null;
     var interval = setInterval(function(){
       var currentHeight = document.body.offsetHeight;
       if (currentHeight != lastHeight || window.goToPosition != null) {
@@ -57,11 +59,24 @@
         if (options.gaDimension && ga) {
           ga('set', options.gaDimension, e.data.href);
         }
+        if (!window.iframeParent && window.iframeParentActivated) {
+          window.iframeParentActivated(e.data);
+        }
         window.iframeParent = e.data
         if (options.callback) {
           options.callback(e.data);
         }
       }
     });
+  }
+  window.scrolliFrameAnimatedTo = function(position) {
+    if (window.iframeParent) {
+      window.goToPosition = position;
+    } else if (jQuery || $) {
+      var $ = (jQuery || $);
+      $('html,body').animate({
+        'scrollTop': position
+      });
+    }
   }
 })();
