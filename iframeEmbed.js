@@ -39,7 +39,7 @@
     window.goToPosition = null;
     window.iframeParent = null;
     var interval = setInterval(function(){
-      var currentHeight = document.body.offsetHeight;
+      var currentHeight = document.body.scrollHeight;
       if (currentHeight != lastHeight || window.goToPosition != null) {
         var message = {
           'source': options.source,
