@@ -22,12 +22,13 @@
   			}
       },false);
       setInterval(function() {
+        var top = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
   			embedIFrame.contentWindow.postMessage({
   				'height': window.innerHeight,
   				'width': window.innerWidth,
           'href': window.location.href,
           'offset': embedIFrame.offsetTop,
-          'scrollTop': document.body.scrollTop - embedIFrame.offsetTop,
+          'scrollTop': top - embedIFrame.offsetTop,
           'hash': window.location.hash
   			},options.messageTarget);
   		},100);
